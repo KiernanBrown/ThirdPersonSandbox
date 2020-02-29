@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Attack : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Attack : MonoBehaviour
     public bool guarding = false;
     public bool evading = false;
     public MovementInput movement;
+    public CinemachineFreeLook cmCamera;
+    public ParticleSystem stompParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -69,11 +72,11 @@ public class Attack : MonoBehaviour
             DisableActions();
             yield return new WaitForSeconds(0.35f);
             movement.verticalVel = 0.0325f;
-            yield return new WaitForSeconds(0.65f);
+            yield return new WaitForSeconds(0.6f);
             actionable = true;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             canStomp = true;
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.5f);
             RestartCombo();
         }
         else if (anim.GetInteger("AttackState") == 3)
@@ -84,7 +87,9 @@ public class Attack : MonoBehaviour
             anim.SetInteger("AttackState", 5);
             yield return new WaitForSeconds(0.35f);
             anim.SetInteger("AttackState", 6);
-            yield return new WaitForSeconds(0.45f);
+            yield return new WaitForSeconds(0.3f);
+            anim.SetInteger("AttackState", 0);
+            yield return new WaitForSeconds(0.15f);
             RestartCombo();
         }
     }
@@ -93,9 +98,12 @@ public class Attack : MonoBehaviour
     {
         anim.SetInteger("AttackState", 10);
         actionable = false;
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.48f);
+        ShakeCamera();
+        stompParticles.Play();
+        yield return new WaitForSeconds(0.38f);
         actionable = true;
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.525f);
         RestartCombo();
     }
 
@@ -152,5 +160,10 @@ public class Attack : MonoBehaviour
         StopCoroutine("Hit");
         StopCoroutine("Stomp");
         StopCoroutine("Evade");
+    }
+
+    void ShakeCamera()
+    {
+        cmCamera.GetComponent<CinemachineImpulseSource>().GenerateImpulse();
     }
 }

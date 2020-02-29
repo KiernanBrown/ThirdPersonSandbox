@@ -10,6 +10,8 @@ ScriptsOnlyBuild:
     - Cinemachine.CinemachineCollider
     - Cinemachine.CinemachineComposer
     - Cinemachine.CinemachineFreeLook
+    - Cinemachine.CinemachineImpulseListener
+    - Cinemachine.CinemachineImpulseSource
     - Cinemachine.CinemachineOrbitalTransposer
     - Cinemachine.CinemachinePipeline
     - Cinemachine.CinemachineVirtualCamera
@@ -51,16 +53,18 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.Universal.PostProcessData
     - UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
-    - UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResources
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.ShaderGraph.Editor.dll:
+    - UnityEditor.Graphing.GraphObject
     - UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -179,6 +183,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13692}
     - Class: 114
+      Script: {instanceID: 13756}
+    - Class: 114
       Script: {instanceID: 13866}
     - Class: 114
       Script: {instanceID: 13932}
@@ -194,6 +200,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14136}
     - Class: 114
       Script: {instanceID: 14246}
+    - Class: 114
+      Script: {instanceID: 14292}
     - Class: 114
       Script: {instanceID: 14480}
     - Class: 114
@@ -233,6 +241,10 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -343,7 +355,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerPersistentCanvas
   - hash:
       serializedVersion: 2
-      Hash: 917ba081c38844021664f53cafd37700
+      Hash: 1940b6b158e7ee5ad8bf24ccd9b49f0d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Attack
