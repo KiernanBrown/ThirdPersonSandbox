@@ -42,6 +42,9 @@ public class PlayerHandler : MonoBehaviour {
     public int attackState;
     public bool guarding = false;
     public bool evading = false;
+    public bool jumping = false;
+    public bool hasJumped = false;
+    public Vector3 jumpDirection;
 
     [Header("Effects")]
     public CinemachineFreeLook cmCamera;
@@ -57,8 +60,23 @@ public class PlayerHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         isGrounded = controller.isGrounded;
+        /*if (jumping)
+        {
+            if (isGrounded && hasJumped)
+            {
+                anim.SetBool("Jumping", false);
+                jumping = false;
+                hasJumped = false;
+                actionable = true;
+                StopCoroutine("Jump");
+            }
+            else
+            {
+                controller.Move(jumpDirection);
+            }
+        }*/
 
-        InputMagnitude ();
+        InputMagnitude();
 
         // Decrease vertical velocity if the player is not grounded
         if (isGrounded)
@@ -68,6 +86,11 @@ public class PlayerHandler : MonoBehaviour {
         else
         {
             verticalVel -= 0.0014f;
+        }
+
+        if (attackState > 0 && !actionable)
+        {
+            verticalVel = Mathf.Clamp(verticalVel, 0.0f, maxJumpSpeed);
         }
 
         // Handle Player Actions
@@ -87,7 +110,11 @@ public class PlayerHandler : MonoBehaviour {
             CancelActions();
             StartCoroutine("Evade");
         }
-
+        /*if (Input.GetButtonDown("Jump") && actionable == true && isGrounded)
+        {
+            //CancelActions();
+            //StartCoroutine("Jump");
+        }*/
 
         moveVector = new Vector3(0, verticalVel, 0);
 		controller.Move(moveVector);
@@ -245,6 +272,23 @@ public class PlayerHandler : MonoBehaviour {
             }
         }
     }
+
+    /*IEnumerator Jump()
+    {
+        jumpDirection = desiredMoveDirection / 45.0f;
+        blockRotationPlayer = true;
+        jumping = true;
+        anim.SetBool("Jumping", true);
+        actionable = false;
+        yield return new WaitForSeconds(0.3f);
+        verticalVel = 0.018f;
+        yield return new WaitForSeconds(0.2f);
+        hasJumped = true;
+        blockRotationPlayer = false;
+        yield return new WaitForSeconds(1.2f);
+        actionable = true;
+        anim.SetBool("Jumping", false);
+    }*/
 
     void RestartCombo()
     {
