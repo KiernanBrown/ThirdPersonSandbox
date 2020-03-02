@@ -5505,7 +5505,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509539570}
-  m_LocalRotation: {x: 0.27288055, y: 0.04652454, z: -0.013212885, w: 0.96083146}
+  m_LocalRotation: {x: 0.27288055, y: 0.0465231, z: -0.013212468, w: 0.9608316}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5591,7 +5591,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.25522572, y: 0.05910019, z: -0.01563183, w: 0.964947}
+  m_LocalRotation: {x: 0.25522575, y: 0.059098348, z: -0.015631344, w: 0.9649471}
   m_LocalPosition: {x: 6.66, y: 11.04, z: -8.799999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -6435,12 +6435,21 @@ MonoBehaviour:
   isGrounded: 0
   maxJumpSpeed: 0.5
   maxFallSpeed: 1
+  verticalVel: 0
+  moveVector: {x: 0, y: 0, z: 0}
+  evadeOffset: 0
   HorizontalAnimSmoothTime: 0.2
   VerticalAnimTime: 0.2
   StartAnimTime: 0.25
   StopAnimTime: 0.1
-  verticalVel: 0
-  moveVector: {x: 0, y: 0, z: 0}
+  actionable: 1
+  canStomp: 0
+  canEvade: 1
+  attackState: 0
+  guarding: 0
+  evading: 0
+  cmCamera: {fileID: 586394408}
+  stompParticles: {fileID: 276489380}
 --- !u!143 &833068550
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6452,13 +6461,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.48
-  m_Radius: 0.18
+  m_Height: 1.5
+  m_Radius: 0.22
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_StepOffset: 0.2
+  m_SkinWidth: 0.03
+  m_MinMoveDistance: 0.0001
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!95 &833068551 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 209a4b1108a50f54894d5ce116fa9684,
@@ -6471,28 +6480,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1719009532}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &833068553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833068548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb961416077bcd4eb3d5fba03f401bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionable: 1
-  canStomp: 0
-  canEvade: 1
-  anim: {fileID: 833068551}
-  state: 0
-  guarding: 0
-  evading: 0
-  movement: {fileID: 0}
-  cmCamera: {fileID: 586394408}
-  stompParticles: {fileID: 276489380}
 --- !u!1 &1115218660
 GameObject:
   m_ObjectHideFlags: 0
@@ -6838,7 +6825,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383318998}
-  m_LocalRotation: {x: 0.25540474, y: 0.046756625, z: -0.012366798, w: 0.96562386}
+  m_LocalRotation: {x: 0.25540474, y: 0.04675517, z: -0.012366376, w: 0.9656239}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7157,7 +7144,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737233715}
-  m_LocalRotation: {x: 0.25522575, y: 0.059100043, z: -0.0156313, w: 0.96494704}
+  m_LocalRotation: {x: 0.25522578, y: 0.059098195, z: -0.015630763, w: 0.96494716}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
