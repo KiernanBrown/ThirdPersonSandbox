@@ -60,7 +60,7 @@ public class PlayerHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         isGrounded = controller.isGrounded;
-        /*if (jumping)
+        if (jumping || hasJumped)
         {
             if (isGrounded && hasJumped)
             {
@@ -74,18 +74,26 @@ public class PlayerHandler : MonoBehaviour {
             {
                 controller.Move(jumpDirection);
             }
-        }*/
+        }
 
         InputMagnitude();
 
         // Decrease vertical velocity if the player is not grounded
-        if (isGrounded)
+        if (isGrounded && !jumping)
         {
-            verticalVel = 0.0014f;
+            verticalVel = -0.000155f;
         }
         else
         {
-            verticalVel -= 0.0014f;
+          if (jumping) {
+            verticalVel -= 0.0001f;
+            verticalVel = Mathf.Clamp(verticalVel, 0.0f, maxJumpSpeed);
+            
+          }
+          else {
+            verticalVel -= 0.0012f;
+          }
+
         }
 
         if (attackState > 0 && !actionable)
@@ -110,11 +118,11 @@ public class PlayerHandler : MonoBehaviour {
             CancelActions();
             StartCoroutine("Evade");
         }
-        /*if (Input.GetButtonDown("Jump") && actionable == true && isGrounded)
+        if (Input.GetButtonDown("Jump") && actionable == true && isGrounded)
         {
-            //CancelActions();
-            //StartCoroutine("Jump");
-        }*/
+            CancelActions();
+            StartCoroutine("Jump");
+        }
 
         moveVector = new Vector3(0, verticalVel, 0);
 		controller.Move(moveVector);
@@ -273,22 +281,32 @@ public class PlayerHandler : MonoBehaviour {
         }
     }
 
-    /*IEnumerator Jump()
+    IEnumerator Jump()
     {
-        jumpDirection = desiredMoveDirection / 45.0f;
+        jumpDirection = desiredMoveDirection / 23.5f;
         blockRotationPlayer = true;
         jumping = true;
         anim.SetBool("Jumping", true);
         actionable = false;
-        yield return new WaitForSeconds(0.3f);
-        verticalVel = 0.018f;
         yield return new WaitForSeconds(0.2f);
+        verticalVel = 0.0255f;
+        yield return new WaitForSeconds(0.15f);
+        actionable = true;
         hasJumped = true;
         blockRotationPlayer = false;
-        yield return new WaitForSeconds(1.2f);
-        actionable = true;
+        yield return new WaitForSeconds(0.15f);
+        jumping = false;
+        yield return new WaitForSeconds(0.5f);
         anim.SetBool("Jumping", false);
-    }*/
+        hasJumped = false;
+    }
+    
+    void CancelJump() {
+        StopCoroutine("Jump");
+        jumping = false;
+        anim.SetBool("Jumping", false);
+        hasJumped = false;
+    }
 
     void RestartCombo()
     {
@@ -310,6 +328,7 @@ public class PlayerHandler : MonoBehaviour {
         StopCoroutine("Hit");
         StopCoroutine("Stomp");
         StopCoroutine("Evade");
+        CancelJump();
     }
 
     void ShakeCamera()
